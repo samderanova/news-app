@@ -4,14 +4,21 @@
 #include <string>
 #include <vector>
 
-#include "crow.h"
+#include "libpq-fe.h"
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
 
-namespace rss
+class ArticleFetcher
 {
-    std::vector<json> fetch_items(const std::string &url);
-}
+  public:
+    ArticleFetcher();
+    ~ArticleFetcher();
+
+  private:
+    std::vector<json> getArticlesFromUrl(const std::string &url);
+
+    pg_conn *conn;
+};
 
 #endif
