@@ -29,8 +29,10 @@ ArticleFetcher::~ArticleFetcher()
 
 std::vector<json> ArticleFetcher::getArticlesFromUrl(const std::string &url)
 {
+    spdlog::info("Fetching articles from " + url);
     feedpp::parser p = feedpp::parser();
     feedpp::feed f = p.parse_url(url);
+    spdlog::info("Successfully parsed articles from " + url);
 
     std::vector<json> items;
     for (feedpp::item &item : f.items)
